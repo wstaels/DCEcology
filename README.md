@@ -2,7 +2,7 @@
 
 ## Introduction
 
-course material of data carpentry workshop BXL
+course material of data carpentry workshop Brussels, looking forward to it!
 
 * this
 * is
