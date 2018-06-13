@@ -1,7 +1,2 @@
-.Rproj.user
-.Rhistory
-.RData
-.Ruserdata
-DCEcology.Rproj
-plots/
-drafts/
+
+library(tidyverse)
