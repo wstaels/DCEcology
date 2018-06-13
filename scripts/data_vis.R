@@ -46,5 +46,54 @@ yearly_count <- surveys_complete %>%
 ggplot(data = yearly_count, aes(x=year, y=n)) +
   geom_line()
 
-ggplot(data = yearly_count, aes(x=year, y=n, group=species_id)) +
+ggplot(data = yearly_count, aes(x=year, y=n, color=species_id)) +
   geom_line()
+
+ggplot(data = yearly_count, aes(x = year, y=n))+
+  geom_line()+
+  facet_wrap(~ species_id)
+
+yearly_sex_count <- surveys_complete %>%
+  group_by(year, species_id,sex) %>%
+  tally()
+
+ggplot(data=yearly_sex_count, aes(x = year, y=n, color=sex))+
+  geom_line()+
+  facet_wrap(~species_id)
+
+ggplot(data=yearly_sex_count, aes(x = year, y=n, color=sex))+
+  geom_line()+
+  facet_wrap(~species_id) +
+  theme_bw() +
+  theme(panel.grid = element_blank())
+
+ggplot(data=yearly_sex_count, aes(x = year, y=n, color=sex))+
+  geom_line()+
+  facet_wrap(~species_id) +
+  theme_bw() +
+  theme(panel.grid = element_blank(), text= element_text(size=16),
+        axis.text.x = element_text(color="grey20", size=12, angle=90)) +
+  labs(title="Observed species over time",
+             x= "Year of observation", y= "Number of observations")
+
+grey_theme <- theme(panel.grid = element_blank(), text= element_text(size=16),
+                    axis.text.x = element_text(color="grey20", size=12, angle=90))
+
+ggplot(data=yearly_sex_count, aes(x = year, y=n, color=sex))+
+  geom_line()+
+  facet_wrap(~species_id) +
+  theme_bw() +
+  grey_theme +
+  labs(title="Observed species over time",
+       x= "Year of observation", y= "Number of observations")
+
+my_plot <- ggplot(data=yearly_sex_count, aes(x = year, y=n, color=sex))+
+  geom_line()+
+  facet_wrap(~species_id) +
+  theme_bw() +
+  labs(title="Observed species over time",
+       x= "Year of observation", y= "Number of observations")
+my_plot
+my_plot + grey_theme
+
+ggsave("plots/my_first_plot.png", my_plot, width = 15, height = 10, dpi=300)
